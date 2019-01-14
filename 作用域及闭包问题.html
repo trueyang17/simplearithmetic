@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style>
+
+</style>
+<body>
+
+<script>
+   /*
+   let a = 10 , b = 10;
+   let fn = function () {
+       //console.log(a,b);//报错
+        let a = b =20;
+        console.log(a,b);//20,20
+   }
+   fn();
+   console.log(a,b)//10 20
+    */
+     
+     //this指向主要看前面是否有点  
+     /*
+       var n = 2;
+       var obj = {
+           n:3,//6
+           fn:(function (n) {
+               n*=2;//4 
+               this.n+=2;//4 8 6全局作用域下的n
+               var n = 5;
+               return function (m) {
+                this.n*=2;
+                console.log(m+(++n))
+               }
+           })(n)
+       }
+       var fn = obj.fn;
+       fn(3);//3+6=9
+       obj.fn(3);//3+7=10
+       console.log(n,obj.n)
+    */
+
+    //原型链相关
+    /*
+    function Fn(){
+        }
+        Fn.a = 15;
+        //Fn.prototype.a = 10; 
+        Function.a = 30;
+        //Object.prototype.a = 20;
+        let f = new Fn()
+        console.log(f.a)
+    */
+
+
+    // function Fn(name){
+    //         this.name = name;
+    //     }
+    //     Fn.prototype = {
+    //         constructor:Fn,
+    //         a:10,
+    //         b:8,
+    //         fn:function(){
+    //             console.log(this.name);
+    //         }
+    //     }
+
+    //     let f = new Fn('许益凡');
+    //     f.fn();
+    //     console.log(f.constructor);
+
+    //  function Fn() {
+    //       var n = 10;
+    //       //this.m = n;
+    //       //return {name:'hhhh'}
+    //       return 'q'
+    //     } 
+    //     let f = new Fn
+    //      console.log(f.n) 
+    //     // console.log(f instanceof Fn)  
+    //     // console.log(f instanceof Object) 
+    //     // console.log('m' in f) 
+    //     // console.log(f.hasOwnProperty('m'))
+    //     // console.log(f.hasOwnProperty('m'))
+    //     function hasPubProperty(obj,attr){    // 首先保证是它的一个属性并且还不是私有属性, 那么只能是公有的属性了
+    //     return (attr in obj) && !obj.hasOwnProperty(attr);
+    // }
+    // console.log(hasPubProperty(f,"m")); // -> false
+    // console.log(hasPubProperty(f,'constructor'))
+
+    /*
+    //老版本中无论条件是否成立函数代码块都提升并执行，新版本中只提升函数名
+    f = function () {
+      return true
+    };
+    g = function () {
+      return false
+    }
+    !function () {
+      if (g() && [] == ![]) {
+        f = function () {
+      return false
+    }
+        function g() {
+          return true
+        }
+      }
+    }()
+    console.log(f())
+    console.log(g())
+    */
+
+
+    // if ([] == ![]) {
+    //   function g() {
+    //   return 1
+    // }
+    // }
+    // console.log(g())
+
+    // if (true) {
+    //   console.log(a)//let没有变量提升
+    //   let a = 2
+    // }
+
+    // var a = 12;
+    // if (true) {
+    //   console.log(a)//var变量提升
+    //   var a = 2
+    // }
+
+    // console.log(typeof a)
+    // console.log(a)//浏览器暂存死区
+
+    // var ary = [12,23];
+    // function fn(ary) {
+    //   console.log(ary);//[12,23]
+    //   ary[0] = 100;//[100,23]
+    //   ary = [100];//[100]重新开辟个一个堆内存与上一个堆内存不同
+    //   ary[0] = 0;//[0]
+    //   console.log(ary);//[0]
+    // }
+    // fn(ary)
+    // console.log(ary);//[100,23]
+
+    // var a = 12;
+    // function fn() {
+    //   console.log(a)
+    //   console.log(arguments.callee)
+    //   console.log(arguments.callee.caller)
+    // }
+    // function sum() {
+    // var a = 20;
+    // fn()
+    // console.log(arguments.callee.caller)
+    // }
+    // sum()
+
+    // var n = 10;
+    // function fn() {
+    //   var n = 20;
+    //   function f() {
+    //     n++;
+    //     console.log(n);
+    //   }
+    //   f()
+    //   return f
+    // }
+    // var x = fn();
+    // x();
+    // x();
+    // console.log(n)
+
+
+    // var i = 1;
+    // function fn(i) {
+    //   return function (n) {
+    //     console.log(n+(++i))
+    //   }
+    // }
+    // var f = fn(2);
+    // f(3)  //6
+    // fn(5)(6)//12
+    // fn(7)(8)//16
+    // f(4)//8
+    // fn(2)(4)
+
+    // function fun() {
+    //   this.a = 0;
+    //   this.b = function () {
+    //     alert(this.a);
+    //   }
+    // }
+    // fun.prototype = {
+    //   b:function () {
+    //     this.a = 20;
+    //     alert(this.a);
+    //   },
+    //   c:function () {
+    //     this.a = 30;
+    //     alert(this.a);
+    //   }
+    // }
+    // var my_fun = new fun();
+    // my_fun.b();
+    // my_fun.c()
+
+
+        // function getName() {
+        //     console.log(5);
+        // }
+        // var getName = function () {
+        //     console.log(4);
+        // };
+        // getName() 
+
+    // function Foo() {
+    //         a = 2;
+    //         getName = function () {
+    //             console.log(1);
+    //         };
+    //         getName.a = function () {
+    //             console.log(3)
+    //         };
+    //         return getName;//返回window，需要
+    //     }
+    // //Foo().getName()  
+    // Foo().a()
+
+
+
+    // console.log(a); //undefined
+    // var a=12; 
+    // function fn(){
+    //     console.log(a); //undefined
+    //     var a=13;   
+    // }
+    // fn();   
+    // console.log(a);//12
+
+
+    // console.log(a); //undefined
+    // var a=12;
+    // function fn(){
+    //     console.log(a);//12
+    //     a=13;
+    // }
+    // fn();
+    // console.log(a);//13
+
+    // console.log(a);//报错
+    // a=12;
+    // function fn(){
+    //     console.log(a);
+    //     a=13;   
+    //   }
+    // fn();
+    // console.log(a);
+
+    // var foo=1; 
+    // function bar(){
+
+    // //外部变量提升 var foo；
+    // //内部变量提升 var foo ！foo表示如果函数内没有foo变量就执行条件语句内的
+
+    //     if(!foo){
+    //         var foo=10; 
+    //     }
+    //     console.log(foo); 
+    // }
+    // bar();
+
+    // var n=0; 
+    // function a(){
+    //     var n=10; 
+    //     function b(){
+    //         n++; 
+    //        console.log(n); //11 12
+    //    }
+    //     b();
+    //     return b; 
+    // }
+    // var c=a();
+    // c(); 
+    // console.log(n);//0
+
+    // var a=10,b=11,c=12;
+    // function test(a){
+    //      a=1;
+    //      var b=2;
+    //      c=3;
+    // }
+    // test(10);
+    // console.log(a);  //10
+    // console.log(b);   //11
+    // console.log(c);   //3 
+
+    // var a=4;
+    // function b(x,y,a) {    
+    //      console.log(a); //3
+    //      arguments[2]=10;        
+    //      console.log(a); //10
+    // }
+    // a=b(1,2,3);   
+    // console.log(a); //undefined
+
+    //var foo='hello'; 
+    // (function(foo){
+    //    console.log(foo);//hello
+    //    var foo=foo||'hello';
+    //    console.log(foo);//world
+    // })(foo);
+    // console.log(foo);//hello
+
+    // var a=9; 
+    // function fn(){ 
+    //     a=0;       
+    //     return function(b){ 
+    //         return b+a++; 
+    //     }    
+    // }
+    // var f=fn();
+    // console.log(f(5));//5
+    // console.log(fn()(5));//5
+    // console.log(f(5));//6
+    // console.log(a);//2
+
+    // var ary=[1,2,3,4];
+    // function fn(ary){
+    //     ary[0]=0;  //  [0,2,3,4]  aaafff000
+    //     ary=[0];    // [0]  aaafff111
+    //     ary[0]=100; // [100] 
+    //     return ary; 
+    // }
+    // var res=fn(ary);    
+    // console.log(ary); //  [0,2,3,4]
+    // console.log(res); //[100] 
+
+
+    // function fn(i) {
+    //     return function (n) {
+    //         console.log(n + (i++));
+    //     }
+    // }
+    // var f = fn(10);
+    // f(20);//30
+    // fn(20)(40);//60
+    // fn(30)(50);//80
+    // f(30);//41
+
+
+    // var i = 10;
+    // function fn() {
+    //     return function (n) {
+    //         console.log(n + (++i));
+    //     }
+    // }
+    // var f = fn();
+    // f(20);//31
+    // fn()(20);//32
+    // fn()(30);//43
+    // f(30);//44
+
+        //闭包中this指向问题
+      // var n = 2;
+      // var obj = {
+      //   n:3,
+      //   fn:(function (n) {
+      //     n*=2;
+      //     this.n+=2;
+      //     var n = 5;
+      //     return function (m) {
+      //     this.n*=2;
+      //     console.log(m+(++n))
+      // }
+      //   })(n)
+      // }
+      // var fn = obj.fn;
+      // fn(3);
+      // obj.fn(3);
+      // console.log(n,obj.n)     
+      
+
+
+
+
+
+      //  var i = 0;
+      // function a() {
+      //     i = i+1;
+      //     console.log(i)
+      //    setTimeout(a,2000) 
+      // }
+      // a()
+
+
+ // var intervalId, timeoutId;
+ //        timeoutId = setTimeout(function () {
+ //            console.log(1);
+ //        }, 300);
+ //        setTimeout(function () {
+ //            clearTimeout(timeoutId);
+ //            console.log(2);
+ //        }, 100);
+ //        setTimeout('console.log("5")', 400);
+ //        intervalId = setInterval(function () {
+ //            console.log(4);
+ //            clearInterval(intervalId);
+ //        }, 200);      
+
+
+    // var name = '中国';
+    // var age = 5000;
+    // age = (function (name,age) {
+    //     name = '珠峰';
+    //     age = age || this.age;//5000
+    //     this.name = arguments[0];
+    //     console.log(name,age)//'珠峰'  5000
+    // })(name,age)//传递的是外部的name = '中国';age = 5000;
+    // console.log(age)//闭包的值不能被外界调用
+    // console.log(name,age)//'珠峰' undefined
+
+
+    // function f(a,b) {
+    //     var a = 1;
+    //     var b = 2;
+    //     console.log(a,b)
+    // }
+    // f(3,4)
+
+    var num = 0;
+    function Fn(num) {
+        arguments[0] = 10;
+        this.num = 20;
+        return num;
+    }
+    Fn.num = 40;//
+    console.log(Fn.num);
+</script>
+
+</body>
+</html>
